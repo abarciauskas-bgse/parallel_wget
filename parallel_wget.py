@@ -10,7 +10,7 @@ def wget_file(file_url, conn):
     try:
       wget.download(file_url)
       print("File {} downloaded!".format(file_url))
-      conn.send([file_url])
+      conn.send(1)
       conn.close()
     except Exception as e:
       print('Got exception: {0}'.format(e))
@@ -43,7 +43,7 @@ def process_pool(file_urls):
 
     files_total = 0
     for parent_connection in parent_connections:
-        files_total += parent_connection.recv()[0]
+        files_total += parent_connection.recv()
 
     return files_total
 
