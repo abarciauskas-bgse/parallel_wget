@@ -17,6 +17,7 @@ parallel_wget.parallel_wget(host=host, path=path, files=files)
 # Development
 
 ```
+rm -rf build dist
 python setup.py sdist
 python setup.py bdist_wheel --universal
 ~/Library/Python/3.6/bin/twine upload dist/*
