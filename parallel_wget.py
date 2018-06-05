@@ -9,7 +9,7 @@ from multiprocessing import Process, Pipe
 def wget_file(file_url, conn):
     try:
       wget.download(file_url)
-      print("File {} downloaded!".format(file_url))
+      print('File {} downloaded!'.format(file_url))
       conn.send(1)
       conn.close()
     except Exception as e:
@@ -50,15 +50,17 @@ def process_pool(file_urls):
 def parallel_wget(host, path, files):
     file_urls = ['{0}{1}{2}'.format(host, path, f) for f in files]
     print('\n'.join(file_urls))
-    print("Downloading files~")
+    print('Downloading files~')
     process_pool(file_urls)
-    downloaded_files = [op.join(os.getcwd(), f) for f in os.listdir(".") if op.isfile(f)]
+    downloaded_files = [op.join(os.getcwd(), f) for f in os.listdir('.') if op.isfile(f) and f.endswith('.tgz')]
+    extracted_files = []
     for file in downloaded_files:
-        if file.endswith(".tgz"):
-            print("unziping {}".format(file))
-            tar = tarfile.open(file, "r:gz")
-            tar.extractall()
-            tar.close()
-            os.remove(file)
-            print("{} has remove".format(file))
+        print('unziping {}'.format(file))
+        tar = tarfile.open(file, 'r:gz')
+        tar.extractall()
+        extracted_files.extend(tar.getnames())
+        tar.close()
+        os.remove(file)
+        print('{} has remove'.format(file))
     print('Completed download of {0} files'.format(len(files)))
+    return extracted_files
