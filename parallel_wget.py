@@ -55,12 +55,11 @@ def parallel_wget(host, path, files):
     downloaded_files = [op.join(os.getcwd(), f) for f in os.listdir('.') if op.isfile(f) and f.endswith('.tgz')]
     extracted_files = []
     for file in downloaded_files:
-        print('unziping {}'.format(file))
+        print('unzipping {}'.format(file))
         tar = tarfile.open(file, 'r:gz')
         tar.extractall()
         extracted_files.extend(tar.getnames())
         tar.close()
         os.remove(file)
-        print('{} has remove'.format(file))
+        print('{} has been removed'.format(file))
     print('Completed download of {0} files'.format(len(files)))
-    return extracted_files

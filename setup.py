@@ -21,7 +21,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 # Fields marked as "Optional" may be commented out.
 setup(
     name='parallel_wget',  # Required
-    version='0.0.9',  # Required
+    version='0.0.10',  # Required
     description='Wget in parallel',  # Required
     long_description='Given a set of http URLs, fetch in parallel',  # Optional
     author='Aimee Barciauskas',  # Optional
