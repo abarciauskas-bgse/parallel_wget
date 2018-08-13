@@ -8,7 +8,7 @@ from multiprocessing import Process, Pipe
 
 def wget_file(file_url, conn):
     try:
-      wget.download(file_url)
+      wget.download(file_url, out='/tmp/{0}'.format(file_url.split('/')[-1]))
       print('File {} downloaded!'.format(file_url))
       conn.send(1)
       conn.close()
